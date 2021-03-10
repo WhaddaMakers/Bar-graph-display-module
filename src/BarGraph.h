@@ -1,22 +1,21 @@
+/*
+
+  LED BAR GRAPH LIBRARY
+  for Whadda WPI471 led bar graph and other TM1561 based LED bar graph modules
+
+  For more information about the example and led bar graph driving library, 
+  check the github page README at https://github.com/WhaddaMakers/bar_graph_module
+  For more information about the LED bar graph module, consult the manual at the WPI471 product page on whadda.com
+
+  Author: Midas Gossye (Whadda/Velleman)
+  Date: 10 March 2021
+  URL: https://github.com/WhaddaMakers/bar_graph_module
+
+*/ 
 //  Author:Fred.Chu
 //  Date:14 August, 2014
 //
-//  Applicable Module:
-//                     Battery Display v1.0
 //
-//  This library is free software; you can redistribute it and/or
-//  modify it under the terms of the GNU Lesser General Public
-//  License as published by the Free Software Foundation; either
-//  version 2.1 of the License, or (at your option) any later version.
-//
-//  This library is distributed in the hope that it will be useful,
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-//  Lesser General Public License for more details.
-//
-//  You should have received a copy of the GNU Lesser General Public
-//  License along with this library; if not, write to the Free Software
-//  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 //
 //Modified record:
 //Autor: 	Detlef Giessmann Germany 
@@ -26,11 +25,10 @@
 //Typ.: 	OPEN-SMART CX10*4RY68  4Color
 //Date: 	01.05.2017
 /***************************************************************/
-//
 /*******************************************************************************/
 
-#ifndef TM1651_H
-#define TM1651_H
+#ifndef BARGRAPH_H
+#define BARGRAPH_H
 #include <inttypes.h>
 #include <Arduino.h>
 	//************definitions for TM1651*********************
@@ -46,18 +44,18 @@
 #define  BRIGHT_TYPICAL 2
 #define  BRIGHTEST      7
 
-class TM1651
+class BarGraph
 {
   public:
 	uint8_t Cmd_SetData;
 	uint8_t Cmd_SetAddr;
 	uint8_t Cmd_DispCtrl;
-	TM1651(uint8_t, uint8_t);
+	BarGraph(uint8_t, uint8_t);
 	void init();
-	void writeByte(int8_t wr_data);//write 8bit data to tm1651
+	void writeByte(int8_t wr_data);//write 8bit data to BarGraph
 	void start(void);//send start bits
 	void stop(void); //send stop bits
-	void displayLevel(uint8_t Level);
+	void setLevel(uint8_t Level);
 	void frame(boolean FrameFlag);
 	void clearDisplay(void);
 	void set(uint8_t = BRIGHT_TYPICAL,uint8_t = 0x40,uint8_t = 0xc0);//To take effect the next time it displays.

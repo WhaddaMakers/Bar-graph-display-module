@@ -1,23 +1,22 @@
+/*
+
+  LED BAR GRAPH LIBRARY
+  for Whadda WPI471 led bar graph and other TM1561 based LED bar graph modules
+
+  For more information about the example and led bar graph driving library, 
+  check the github page README at https://github.com/WhaddaMakers/bar_graph_module
+  For more information about the LED bar graph module, consult the manual at the WPI471 product page on whadda.com
+
+  Author: Midas Gossye (Whadda/Velleman)
+  Date: 10 March 2021
+  URL: https://github.com/WhaddaMakers/bar_graph_module
+
+*/ 
 //  Author:Fred.Chu
 //  Date:14 August, 2014
 //
-//  Applicable Module:
-//                     Battery Display v1.0
 //
-//  This library is free software; you can redistribute it and/or
-//  modify it under the terms of the GNU Lesser General Public
-//  License as published by the Free Software Foundation; either
-//  version 2.1 of the License, or (at your option) any later version.
 //
-//  This library is distributed in the hope that it will be useful,
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-//  Lesser General Public License for more details.
-//
-//  You should have received a copy of the GNU Lesser General Public
-//  License along with this library; if not, write to the Free Software
-//  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-
 //Modified record:
 //Autor: 	Detlef Giessmann Germany 
 //Mail:	mydiyp@web.de
@@ -27,12 +26,12 @@
 //Date: 	01.05.2017
 /***************************************************************/
 /*******************************************************************************/
-#include "TM1651.h"
+#include "BarGraph.h"
 #include <Arduino.h>
 static int8_t LevelTab[] = 
 {0x00,0x01,0x03,0x07,0x0f,0x1f,0x3f,0x7f};//Level 0~7
 
-TM1651::TM1651(uint8_t Clk, uint8_t Data)
+BarGraph::BarGraph(uint8_t Clk, uint8_t Data)
 {
   Clkpin = Clk;
   Datapin = Data;
@@ -40,13 +39,13 @@ TM1651::TM1651(uint8_t Clk, uint8_t Data)
   pinMode(Datapin,OUTPUT);
 }
 
-void TM1651::init()
+void BarGraph::init()
 {
   set(BRIGHT_TYPICAL);
   clearDisplay();
 }
 
-void TM1651::writeByte(int8_t wr_data)
+void BarGraph::writeByte(int8_t wr_data)
 {
   uint8_t i,count1;   
   for(i=0;i<8;i++)        //sent 8bit data
@@ -78,17 +77,17 @@ void TM1651::writeByte(int8_t wr_data)
   pinMode(Datapin,OUTPUT);
   
 }
-//send start signal to TM1651
-void TM1651::start(void)
+//send start signal to BarGraph
+void BarGraph::start(void)
 {
-  digitalWrite(Clkpin,HIGH);//send start signal to TM1651
+  digitalWrite(Clkpin,HIGH);//send start signal to BarGraph
   digitalWrite(Datapin,HIGH);
   delayMicroseconds(2);
   digitalWrite(Datapin,LOW); 
   digitalWrite(Clkpin,LOW); 
 } 
 //End of transmission
-void TM1651::stop(void)
+void BarGraph::stop(void)
 {
   digitalWrite(Clkpin,LOW);
  // delayMicroseconds(2);
@@ -99,10 +98,10 @@ void TM1651::stop(void)
   digitalWrite(Datapin,HIGH); 
 }
 //******************************************
-void TM1651::displayLevel(uint8_t Level)
+void BarGraph::setLevel(uint8_t Level)
 {
   if(Level > 7)return;//Level should be 0~7
-  start();          //start signal sent to TM1651 from MCU
+  start();          //start signal sent to BarGraph from MCU
   writeByte(ADDR_FIXED);//
   stop();           //
   start();          //
@@ -114,9 +113,9 @@ void TM1651::displayLevel(uint8_t Level)
   stop();           //
 }
 
-void TM1651::setBar(uint8_t value)
+void BarGraph::setBar(uint8_t value)
 {
-  start();          //start signal sent to TM1651 from MCU
+  start();          //start signal sent to BarGraph from MCU
   writeByte(ADDR_FIXED);//
   stop();           //
   start();          //
@@ -128,19 +127,19 @@ void TM1651::setBar(uint8_t value)
   stop();           //
 }
 
-void TM1651::setDot(uint8_t level) {
+void BarGraph::setDot(uint8_t level) {
   if(level == 0) setBar(0x00);
   else {
     setBar(0x01<<(level-1));
   }
 }
 
-void TM1651::frame(boolean FrameFlag)
+void BarGraph::frame(boolean FrameFlag)
 {
   int8_t SegData;
   if (FrameFlag == 1) SegData = 0x40;
   else SegData = 0x00;
-  start();          //start signal sent to TM1651 from MCU
+  start();          //start signal sent to BarGraph from MCU
   writeByte(ADDR_AUTO);//
   stop();           //
   start();          //
@@ -155,13 +154,13 @@ void TM1651::frame(boolean FrameFlag)
   stop();           //
 }
 
-void TM1651::clearDisplay(void)
+void BarGraph::clearDisplay(void)
 {
-  displayLevel(0);
+  setLevel(0);
   frame(FRAME_OFF);
 }
 //To take effect the next time it displays.
-void TM1651::set(uint8_t brightness,uint8_t SetData,uint8_t SetAddr)
+void BarGraph::set(uint8_t brightness,uint8_t SetData,uint8_t SetAddr)
 {
   Cmd_SetData = SetData;
   Cmd_SetAddr = SetAddr;
