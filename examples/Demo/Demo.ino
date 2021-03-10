@@ -31,7 +31,7 @@
 
 */
 
-#include "BarGraph.h"
+#include <BarGraph.h>
 
 //pins definitions for LED bar graph module (can be changed to other pins)
 #define CLK 3 // CLK pin

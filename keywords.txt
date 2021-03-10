@@ -1,13 +1,13 @@
 # Syntax Coloring Map For bar graph library
 
 # Datatypes (KEYWORD1)
-BarGraph    KEYWORD1
+BarGraph	KEYWORD1
 
 # Methods and Functions (KEYWORD2)
-init    KEYWORD2
-set KEYWORD2
+init	KEYWORD2
+set	KEYWORD2
 setDot	KEYWORD2
 setLevel	KEYWORD2
-setBar  KEYWORD2
+setBar	KEYWORD2
 
 # Constants (LITERAL1)
