@@ -1,4 +1,4 @@
-# Whadda bar graph module
+# Whadda bar graph module [![Arduino_CI](https://github.com/WhaddaMakers/bar_graph_module/actions/workflows/Arduino_CI.yml/badge.svg)](https://github.com/WhaddaMakers/bar_graph_module/actions/workflows/Arduino_CI.yml)
 
 This repository contains the library and example code to work with our Whadda WPI471 LED bar graph module. The library can also be use to drive any other LED bar graph module that uses the TM1651 LED driver IC.
 
