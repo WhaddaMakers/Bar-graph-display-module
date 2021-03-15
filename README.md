@@ -1,4 +1,4 @@
-# Whadda bar graph module [![Arduino_CI](https://github.com/WhaddaMakers/bar_graph_module/actions/workflows/Arduino_CI.yml/badge.svg)](https://github.com/WhaddaMakers/bar_graph_module/actions/workflows/Arduino_CI.yml)
+# Whadda bar graph module [![Arduino_CI](https://github.com/WhaddaMakers/bar_graph_module/actions/workflows/Arduino_CI.yml/badge.svg)](https://github.com/WhaddaMakers/bar_graph_module/actions/workflows/Arduino_CI.yml) [![arduino-library-badge](https://www.ardu-badge.com/badge/bar_graph_module.svg?)](https://www.ardu-badge.com/bar_graph_module)
 
 This repository contains the library and example code to work with our Whadda WPI471 LED bar graph module. The library can also be use to drive any other LED bar graph module that uses the TM1651 LED driver IC.
 
@@ -6,7 +6,12 @@ This repository contains the library and example code to work with our Whadda WP
 
 ## Installation
 
-Download the most recent version of the Arduino library using the Arduino library manager
+Download the most recent version of the Whadda LED bar graph Arduino library by using the built-in Arduino library manager:
+
+1. Open the Arduino IDE, go to ```Sketch > Include Library > Manage Libraries...```
+2. Search for **Whadda LED bar graph** in the Library manager search window
+3. Click **install** on the first search result
+
 
 ## Example
 
